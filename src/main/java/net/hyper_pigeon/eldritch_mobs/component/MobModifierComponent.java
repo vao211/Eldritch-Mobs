@@ -14,6 +14,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
@@ -51,10 +52,11 @@ public class MobModifierComponent implements ModifierComponent {
     }
 
     public boolean canBeBuffed(MobEntity mobEntity) {
-        return this.rank == MobRank.UNDECIDED &&
-                (mobEntity.getType().isIn(EldritchMobTagKeys.ALLOWED)
-                && !mobEntity.getType().isIn(EldritchMobTagKeys.BLACKLIST) &&
-                !(mobEntity.hasCustomName() && EldritchMobsMod.ELDRITCH_MOBS_CONFIG.ignoreNamedMobs)
+        return this.rank == MobRank.UNDECIDED
+                && (mobEntity instanceof Monster)
+//              && (mobEntity.getType().isIn(EldritchMobTagKeys.ALLOWED)
+                && !(mobEntity.getType().isIn(EldritchMobTagKeys.BLACKLIST)
+                && !(mobEntity.hasCustomName() && EldritchMobsMod.ELDRITCH_MOBS_CONFIG.ignoreNamedMobs)
         );
     }
 
